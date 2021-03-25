@@ -9,5 +9,5 @@ export const userReducer = createReducer(initialState, builder => {
   builder
     .addCase(setAuth, (state, action) => {
       state.isAuth = action.payload
-    })
-})
+    });
+});

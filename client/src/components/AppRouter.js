@@ -1,13 +1,12 @@
 import React from 'react';
-import {Switch, Route, Link, Redirect} from 'react-router-dom';
+import {Switch, Route, Redirect} from 'react-router-dom';
 import {authRoutes, publicRoutes} from "../routes";
 import {SHOP_ROUTE} from "../utils/consts";
-import {useDispatch, useSelector} from "react-redux";
-import {setAuth} from "../redux/actions/userActions";
+import {useSelector} from "react-redux";
 
 const AppRouter = () => {
-  const isAuth = useSelector(({user}) => user.isAuth)
-  // const dispatch = useDispatch()
+  const {isAuth} = useSelector(({user}) => user);
+  const {devices} = useSelector(({devices}) => devices);
 
   return (
     <Switch>
