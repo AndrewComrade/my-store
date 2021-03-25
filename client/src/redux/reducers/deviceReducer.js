@@ -1,5 +1,5 @@
 import {createReducer} from "@reduxjs/toolkit";
-import {setBrands, setDevices, setSelectedType, setTypes} from "../actions/deviceActions";
+import {setBrands, setDevices, setSelectedBrand, setSelectedType, setTypes} from "../actions/deviceActions";
 
 const initialState = {
   types: [
@@ -12,7 +12,12 @@ const initialState = {
   brands: [
     {id: 1, name: 'Samsung'},
     {id: 2, name: 'Xiaomi'},
+    {id: 3, name: 'Lenovo'},
+    {id: 4, name: 'Acer'},
+    {id: 5, name: 'Asus'},
+    {id: 6, name: 'Zver'},
   ],
+  selectedBrand: {},
   devices: [
     {
       id: 1,
@@ -58,5 +63,8 @@ export const deviceReducer = createReducer(initialState, builder => {
     })
     .addCase(setSelectedType, (state, action) => {
       state.selectedType = action.payload
+    })
+    .addCase(setSelectedBrand, (state, action) => {
+      state.selectedBrand = action.payload
     });
 });
