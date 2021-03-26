@@ -1,25 +1,68 @@
-import React from 'react';
-import {Container, Grid, List, ListItem, ListItemText} from "@material-ui/core";
+import React, {useState} from 'react';
+import {Container, List, ListItem, ListItemText} from "@material-ui/core";
+import CreateType from "../components/modals/CreateType";
+import CreateDevice from "../components/modals/CreateDevice";
+import CreateBrand from "../components/modals/CreateBrand";
 
 const Admin = () => {
+  const [openTypeModal, setOpenTypeModal] = useState(false);
+  const [openBrandModal, setOpenBrandModal] = useState(false);
+  const [openDeviceModal, setOpenDeviceModal] = useState(false);
+
+  const handleOpenModal = (modalType) => {
+    switch (modalType) {
+      case 'type':
+        setOpenTypeModal(true);
+        break;
+      case 'brand':
+        setOpenBrandModal(true)
+        break;
+      case 'device':
+        setOpenDeviceModal(true)
+        break;
+      default:
+        break;
+    }
+  }
+
+  const handleCloseModal = (modalType) => {
+    switch (modalType) {
+      case 'type':
+        setOpenTypeModal(false);
+        break;
+      case 'brand':
+        setOpenBrandModal(false)
+        break;
+      case 'device':
+        setOpenDeviceModal(false)
+        break;
+      default:
+        break;
+    }
+  }
+
   return (
     <Container>
-      <Grid container>
-        <Grid item xs={3}>
-          <List component="li">
-            <ListItem button>
-              <ListItemText primary="Inbox" />
-            </ListItem>
-            <ListItem button>
-              <ListItemText primary="Drafts" />
-            </ListItem>
-            <ListItem button>
-              <ListItemText primary="Drafts" />
-            </ListItem>
-          </List>
-        </Grid>
-        <Grid item xs={9}></Grid>
-      </Grid>
+      <List component="ul" style={{display: 'flex'}}>
+        <ListItem button onClick={() => handleOpenModal('type')}>
+          <ListItemText style={{textAlign: 'center'}}>
+            Добавить тип
+          </ListItemText>
+        </ListItem>
+        <ListItem button onClick={() => handleOpenModal('brand')}>
+          <ListItemText style={{textAlign: 'center'}}>
+            Добавить бренд
+          </ListItemText>
+        </ListItem>
+        <ListItem button onClick={() => handleOpenModal('device')}>
+          <ListItemText style={{textAlign: 'center'}}>
+            Добавить устройство
+          </ListItemText>
+        </ListItem>
+      </List>
+      <CreateType open={openTypeModal} handleCloseModal={() => handleCloseModal('type')}/>
+      <CreateBrand open={openBrandModal} handleCloseModal={() => handleCloseModal('brand')}/>
+      <CreateDevice open={openDeviceModal} handleCloseModal={() => handleCloseModal('device')}/>
     </Container>
   );
 };

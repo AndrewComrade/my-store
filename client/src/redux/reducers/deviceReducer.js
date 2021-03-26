@@ -24,28 +24,28 @@ const initialState = {
       name: 'Aphone',
       price: 2500,
       rating: 5,
-      img: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.cnet.com%2Fnews%2Fbest-phone-2021-buy%2F&psig=AOvVaw0FP90qFyEBPBvfmhf8udk7&ust=1616663764906000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCJCR2_3LyO8CFQAAAAAdAAAAABAD'
+      img: 'https://i.pinimg.com/originals/fb/d5/4b/fbd54b0c65fcada0999a48b6eb457ff7.jpg'
     },
     {
       id: 2,
       name: 'Bphone',
       price: 3500,
       rating: 4,
-      img: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.cnet.com%2Fnews%2Fbest-phone-2021-buy%2F&psig=AOvVaw0FP90qFyEBPBvfmhf8udk7&ust=1616663764906000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCJCR2_3LyO8CFQAAAAAdAAAAABAD'
+      img: 'https://i.pinimg.com/originals/fb/d5/4b/fbd54b0c65fcada0999a48b6eb457ff7.jpg',
     },
     {
       id: 3,
       name: 'Cphone',
       price: 4500,
       rating: 3,
-      img: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.cnet.com%2Fnews%2Fbest-phone-2021-buy%2F&psig=AOvVaw0FP90qFyEBPBvfmhf8udk7&ust=1616663764906000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCJCR2_3LyO8CFQAAAAAdAAAAABAD'
+      img: 'https://i.pinimg.com/originals/fb/d5/4b/fbd54b0c65fcada0999a48b6eb457ff7.jpg'
     },
     {
       id: 4,
       name: 'Dphone',
       price: 5500,
       rating: 2,
-      img: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.cnet.com%2Fnews%2Fbest-phone-2021-buy%2F&psig=AOvVaw0FP90qFyEBPBvfmhf8udk7&ust=1616663764906000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCJCR2_3LyO8CFQAAAAAdAAAAABAD'
+      img: 'https://i.pinimg.com/originals/fb/d5/4b/fbd54b0c65fcada0999a48b6eb457ff7.jpg'
     },
   ]
 };

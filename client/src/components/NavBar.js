@@ -3,7 +3,7 @@ import {AppBar, Button, Container, Grid, IconButton, Toolbar} from "@material-ui
 import {PhoneIphone, ShoppingCart} from "@material-ui/icons";
 import {Link} from "react-router-dom";
 import {useSelector} from "react-redux";
-import {SHOP_ROUTE} from "../utils/consts";
+import {ADMIN_ROUTE, SHOP_ROUTE} from "../utils/consts";
 
 const NavBar = () => {
   const {isAuth} = useSelector(({user}) => user)
@@ -18,7 +18,9 @@ const NavBar = () => {
           <Grid container justify="flex-end">
             {isAuth ?
               <Grid item alignItems="center">
-                <Button color="inherit">Admin</Button>
+                <Link to={ADMIN_ROUTE} style={{color: '#fff', textDecoration: 'none'}}>
+                  <Button color="inherit">Admin</Button>
+                </Link>
                 <IconButton color="inherit" aria-label="shopping-cart">
                   <ShoppingCart/>
                 </IconButton>

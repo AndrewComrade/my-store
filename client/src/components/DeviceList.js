@@ -7,7 +7,7 @@ const DeviceList = () => {
   const {devices} = useSelector(({devices}) => devices);
 
   return (
-    <Grid container>
+    <Grid container spacing={2}>
       {devices && devices.map(device =>
         <DeviceItem key={device.id} {...device} />
       )}
