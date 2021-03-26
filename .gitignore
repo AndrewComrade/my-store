@@ -1,6 +1,7 @@
 .idea
 my-store.iml
-/client/node_modules
+node_modules
+
 /client/.pnp
 /client/.pnp.js
 
@@ -17,5 +18,3 @@ my-store.iml
 /client/npm-debug.log*
 /client/yarn-debug.log*
 /client/yarn-error.log*
-
-/server/node_modules
