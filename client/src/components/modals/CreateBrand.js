@@ -1,37 +1,24 @@
-import React from 'react';
-import {Button, Grid, makeStyles, Modal, TextField} from "@material-ui/core";
-
-const useStyles = makeStyles((theme) => ({
-  modal: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    width: 400,
-    outline: 'none',
-    border: '1px solid grey',
-    borderRadius: 15,
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-    transform: 'translate(-50%, -50%)'
-  },
-  input: {
-    width: '100%',
-    marginBottom: 20
-  }
-}));
+import React, {useState} from 'react';
+import {Button, Grid, Modal, TextField} from "@material-ui/core";
+import {useStyles} from "./modals.styles";
 
 const CreateBrand = ({open, handleCloseModal}) => {
   const classes = useStyles();
+
+  const [brand, setBrand] = useState('');
+
+  const onInputChange = (e) => {
+    setBrand(e.target.value)
+  };
 
   const modalBody = (
     <div className={classes.modal}>
       <Grid>
         <form>
-          <TextField variant="outlined" label="Введите название нового бренда" className={classes.input}/>
+          <TextField value={brand} onChange={onInputChange} variant="outlined" label="Введите название нового бренда" className={classes.input}/>
         </form>
       </Grid>
-      <Grid container justify="space-between">
+      <Grid container justify="space-between" className={classes.btnContainer}>
         <Button variant='outlined'>Добавить бренд</Button>
         <Button variant='outlined' onClick={handleCloseModal}>Отмена</Button>
       </Grid>

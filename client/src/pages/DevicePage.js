@@ -3,7 +3,7 @@ import {Button, Container, Grid, List, ListItem, Typography} from "@material-ui/
 import {useSelector} from "react-redux";
 
 const DevicePage = () => {
-  const devices = useSelector(({devices}) => devices)
+  // const devices = useSelector(({devices}) => devices)
   const description = [
     {id: 1, title: 'Оперативная память', description: '5 гб'},
     {id: 2, title: 'Камера', description: '12 мп'},

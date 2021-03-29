@@ -17,7 +17,7 @@ const NavBar = () => {
           </Link>
           <Grid container justify="flex-end">
             {isAuth ?
-              <Grid item alignItems="center">
+              <Grid item>
                 <Link to={ADMIN_ROUTE} style={{color: '#fff', textDecoration: 'none'}}>
                   <Button color="inherit">Admin</Button>
                 </Link>
