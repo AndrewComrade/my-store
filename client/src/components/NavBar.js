@@ -2,11 +2,17 @@ import React from 'react';
 import {AppBar, Button, Container, Grid, IconButton, Toolbar} from "@material-ui/core";
 import {PhoneIphone, ShoppingCart} from "@material-ui/icons";
 import {Link} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {ADMIN_ROUTE, SHOP_ROUTE} from "../utils/consts";
+import {setAuth} from "../redux/actions/userActions";
 
 const NavBar = () => {
-  const {isAuth} = useSelector(({user}) => user)
+  const {isAuth} = useSelector(({user}) => user);
+  const dispatch = useDispatch();
+
+  const onExitClick = () => {
+    dispatch(setAuth(false))
+  };
 
   return (
     <Container maxWidth={false} style={{margin: 0, padding: 0}}>
@@ -24,7 +30,7 @@ const NavBar = () => {
                 <IconButton color="inherit" aria-label="shopping-cart">
                   <ShoppingCart/>
                 </IconButton>
-                <Button color="inherit">Exit</Button>
+                <Button color="inherit" onClick={onExitClick}>Exit</Button>
               </Grid>
               :
               <Grid item>
