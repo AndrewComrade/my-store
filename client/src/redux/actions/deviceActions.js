@@ -1,4 +1,4 @@
-import {createAction} from "@reduxjs/toolkit";
+import {createAction} from '@reduxjs/toolkit';
 
 export const setTypes = createAction('user/SET_TYPES');
 export const setBrands = createAction('user/SET_BRANDS');

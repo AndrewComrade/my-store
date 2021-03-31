@@ -7,29 +7,29 @@ import {
   Modal,
   Select,
   TextField,
-  Typography
-} from "@material-ui/core";
-import {useSelector} from "react-redux";
-import {useStyles} from "./modals.styles";
+  Typography,
+} from '@material-ui/core';
+import {useSelector} from 'react-redux';
+import {useStyles} from './modals.styles';
 
 const CreateDevice = ({open, handleCloseModal}) => {
   const classes = useStyles();
 
   const {brands, types} = useSelector(({devices}) => devices);
 
-  const [type, setType] = useState(types[0].name);
-  const [brand, setBrand] = useState(brands[0].name);
+  const [type, setType] = useState('');
+  const [brand, setBrand] = useState('');
   const [name, setName] = useState('');
   const [price, setPrice] = useState(0);
 
   const [info, setInfo] = useState([]);
 
   const addInfo = () => {
-    setInfo([...info, {title: '', description: '', number: Date.now()}])
+    setInfo([...info, {title: '', description: '', number: Date.now()}]);
   };
 
   const removeInfo = (number) => {
-    setInfo(info.filter(i => i.number !== number))
+    setInfo(info.filter((i) => i.number !== number));
   };
 
   const handleTypeChange = (e) => {
@@ -41,11 +41,11 @@ const CreateDevice = ({open, handleCloseModal}) => {
   };
 
   const onNameChange = (e) => {
-    setName(e.target.value)
+    setName(e.target.value);
   };
 
   const onPriceChange = (e) => {
-    setPrice(e.target.value)
+    setPrice(e.target.value);
   };
 
   const priceInputProps = {
@@ -65,8 +65,13 @@ const CreateDevice = ({open, handleCloseModal}) => {
               onChange={handleTypeChange}
               value={type}
             >
-              {types && types.map(type =>
-                <MenuItem key={type.id} value={type.name}>{type.name}</MenuItem>
+              {types && types.map((type) =>
+                <MenuItem
+                  key={type.id}
+                  value={type.name}
+                >
+                  {type.name}
+                </MenuItem>,
               )}
             </Select>
           </FormControl>
@@ -78,24 +83,50 @@ const CreateDevice = ({open, handleCloseModal}) => {
               onChange={handleBrandChange}
               value={brand}
             >
-              {brands && brands.map(brand =>
-                <MenuItem key={brand.id} value={brand.name}>{brand.name}</MenuItem>
+              {brands && brands.map((brand) =>
+                <MenuItem
+                  key={brand.id}
+                  value={brand.name}
+                >
+                  {brand.name}
+                </MenuItem>,
               )}
             </Select>
           </FormControl>
         </Grid>
         <Grid container direction="column">
-          <TextField value={name} onChange={onNameChange} variant="outlined" label="Введите название нового устройства"
-                     className={classes.input}/>
-          <TextField value={price} onChange={onPriceChange} inputProps={priceInputProps} variant="outlined"
-                     label="Введите стоимость устройства" className={classes.input}/>
+          <TextField
+            value={name}
+            onChange={onNameChange}
+            variant="outlined"
+            label="Введите название нового устройства"
+            className={classes.input}
+          />
+          <TextField
+            value={price}
+            onChange={onPriceChange}
+            inputProps={priceInputProps}
+            variant="outlined"
+            label="Введите стоимость устройства"
+            className={classes.input}
+          />
           <Typography component="h4">Характеристики:</Typography>
         </Grid>
         <Grid container direction="column">
-          <Button variant="outlined" onClick={addInfo}>Добавить свойство</Button>
-          {info && info.map(i =>
-            <Box mt={2} key={i.number} >
-              <Grid container item xs={12} spacing={2} justify="space-between" alignItems="center">
+          <Button
+            variant="outlined"
+            onClick={addInfo}
+          >
+            Добавить свойство
+          </Button>
+          {info && info.map((i) =>
+            <Box mt={2} key={i.number}>
+              <Grid
+                container
+                item xs={12}
+                spacing={2}
+                justify="space-between"
+                alignItems="center">
                 <Grid item xs={4}>
                   <TextField variant="outlined" label="Название свойства"/>
                 </Grid>
@@ -106,7 +137,7 @@ const CreateDevice = ({open, handleCloseModal}) => {
                   <Button onClick={() => removeInfo(i.number)}>Удалить</Button>
                 </Grid>
               </Grid>
-            </Box>
+            </Box>,
           )}
         </Grid>
       </form>

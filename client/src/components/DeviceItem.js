@@ -1,7 +1,7 @@
 import React from 'react';
-import {Card, CardContent, CardMedia, Grid, makeStyles, Typography} from "@material-ui/core";
-import {useHistory} from "react-router";
-import {DEVICE_ROUTE} from "../utils/consts";
+import {Card, CardContent, CardMedia, Grid, makeStyles, Typography} from '@material-ui/core';
+import {useHistory} from 'react-router';
+import {DEVICE_ROUTE} from '../utils/consts';
 
 const DeviceItem = ({id, img, name, price, rating}) => {
   const useStyles = makeStyles((theme) => ({
@@ -25,8 +25,8 @@ const DeviceItem = ({id, img, name, price, rating}) => {
   const history = useHistory();
 
   const onCardClick = () => {
-    history.push(DEVICE_ROUTE + '/' + id)
-  }
+    history.push(DEVICE_ROUTE + '/' + id);
+  };
 
   return (
     <Grid item xs={4} style={{marginTop: 20}}>

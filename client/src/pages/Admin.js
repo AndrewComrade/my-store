@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import {Container, List, ListItem, ListItemText} from "@material-ui/core";
-import CreateType from "../components/modals/CreateType";
-import CreateDevice from "../components/modals/CreateDevice";
-import CreateBrand from "../components/modals/CreateBrand";
+import {Container, List, ListItem, ListItemText} from '@material-ui/core';
+import CreateType from '../components/modals/CreateType';
+import CreateDevice from '../components/modals/CreateDevice';
+import CreateBrand from '../components/modals/CreateBrand';
 
 const Admin = () => {
   const [openTypeModal, setOpenTypeModal] = useState(false);
@@ -15,15 +15,15 @@ const Admin = () => {
         setOpenTypeModal(true);
         break;
       case 'brand':
-        setOpenBrandModal(true)
+        setOpenBrandModal(true);
         break;
       case 'device':
-        setOpenDeviceModal(true)
+        setOpenDeviceModal(true);
         break;
       default:
         break;
     }
-  }
+  };
 
   const handleCloseModal = (modalType) => {
     switch (modalType) {
@@ -31,15 +31,15 @@ const Admin = () => {
         setOpenTypeModal(false);
         break;
       case 'brand':
-        setOpenBrandModal(false)
+        setOpenBrandModal(false);
         break;
       case 'device':
-        setOpenDeviceModal(false)
+        setOpenDeviceModal(false);
         break;
       default:
         break;
     }
-  }
+  };
 
   return (
     <Container>

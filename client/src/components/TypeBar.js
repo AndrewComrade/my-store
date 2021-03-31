@@ -1,8 +1,8 @@
 import React from 'react';
-import {List, ListItem, ListItemText} from "@material-ui/core";
-import {useDispatch, useSelector} from "react-redux";
-import {setSelectedType} from "../redux/actions/deviceActions";
-import {makeStyles} from "@material-ui/core/styles";
+import {List, ListItem, ListItemText} from '@material-ui/core';
+import {useDispatch, useSelector} from 'react-redux';
+import {setSelectedType} from '../redux/actions/deviceActions';
+import {makeStyles} from '@material-ui/core/styles';
 
 const TypeBar = () => {
   const useStyles = makeStyles((theme) => ({
@@ -17,12 +17,12 @@ const TypeBar = () => {
   const dispatch = useDispatch();
   const {types, selectedType} = useSelector(({devices}) => devices);
   const onTypeClick = (type) => {
-    dispatch(setSelectedType(type))
-  }
+    dispatch(setSelectedType(type));
+  };
 
   return (
     <List component="ul">
-      {types && types.map(type =>
+      {types && types.map((type) =>
         <ListItem
           button
           className={classes.text}
@@ -32,7 +32,7 @@ const TypeBar = () => {
           selected={type.id === selectedType.id}
         >
           <ListItemText primary={type.name}/>
-        </ListItem>
+        </ListItem>,
       )}
     </List>
   );

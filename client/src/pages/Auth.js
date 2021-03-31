@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
-import {Typography, TextField, Grid, Button, Container} from "@material-ui/core";
-import {makeStyles} from "@material-ui/core/styles";
-import {useHistory, useLocation} from "react-router";
-import {LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE} from "../utils/consts";
-import {Link} from "react-router-dom";
-import {login, registration} from "../http/userAPI";
-import {useDispatch, useSelector} from "react-redux";
-import {setAuth, setUser} from "../redux/actions/userActions";
+import {Typography, TextField, Grid, Button, Container} from '@material-ui/core';
+import {makeStyles} from '@material-ui/core/styles';
+import {useHistory, useLocation} from 'react-router';
+import {LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE} from '../utils/consts';
+import {Link} from 'react-router-dom';
+import {login, registration} from '../http/userAPI';
+import {useDispatch, useSelector} from 'react-redux';
+import {setAuth, setUser} from '../redux/actions/userActions';
 
 const Auth = () => {
   const useStyles = makeStyles((theme) => ({
@@ -50,20 +50,20 @@ const Auth = () => {
       } else {
         data = await registration(email, password);
       }
-      dispatch(setUser(data))
-      dispatch(setAuth(true))
-      history.push(SHOP_ROUTE)
+      dispatch(setUser(data));
+      dispatch(setAuth(true));
+      history.push(SHOP_ROUTE);
     } catch (e) {
-      alert(e.response.data.message)
+      alert(e.response.data.message);
     }
   };
 
   const onEmailChange = (e) => {
-    setEmail(e.target.value)
+    setEmail(e.target.value);
   };
 
   const onPasswordChange = (e) => {
-    setPassword((e.target.value))
+    setPassword((e.target.value));
   };
 
   return (
@@ -71,14 +71,13 @@ const Auth = () => {
       <form className={classes.form} noValidate autoComplete="off">
         <Typography className={classes.text}>{isLogin ? 'Авторизация' : 'Регистрация'}</Typography>
         <TextField className={classes.input} id="email" label="Your Email" variant="filled" value={email}
-                   onChange={onEmailChange}/>
+          onChange={onEmailChange}/>
         <TextField className={classes.input} type="password" id="password" label="Your Password" variant="filled" value={password}
-                   onChange={onPasswordChange}/>
+          onChange={onPasswordChange}/>
         <Grid container alignItems="center" justify="space-between" style={{marginTop: 20}}>
           <Grid item>
             {isLogin ?
-              <Typography>Нет аккаунта? <Link to={REGISTRATION_ROUTE}>Зарегистрируйся!</Link></Typography>
-              :
+              <Typography>Нет аккаунта? <Link to={REGISTRATION_ROUTE}>Зарегистрируйся!</Link></Typography> :
               <Typography>Есть аккаунт? <Link to={LOGIN_ROUTE}>Войти</Link></Typography>
             }
           </Grid>

@@ -1,16 +1,20 @@
 import React from 'react';
-import {Button, Container, Grid, List, ListItem, Typography} from "@material-ui/core";
-import {useSelector} from "react-redux";
+import {
+  Button,
+  Container,
+  Grid,
+  List,
+  ListItem,
+  Typography} from '@material-ui/core';
 
 const DevicePage = () => {
-  // const devices = useSelector(({devices}) => devices)
   const description = [
     {id: 1, title: 'Оперативная память', description: '5 гб'},
     {id: 2, title: 'Камера', description: '12 мп'},
     {id: 3, title: 'Процессор', description: 'Пентиум 3'},
     {id: 4, title: 'Кол-во ядер', description: '2'},
     {id: 5, title: 'Аккумулятор', description: '4000'},
-  ]
+  ];
 
   return (
     <Container>
@@ -33,8 +37,8 @@ const DevicePage = () => {
       </Grid>
       <h4>Характеристики:</h4>
       <List>
-        {description && description.map(info =>
-          <ListItem key={info.id}>{info.title}: {info.description}</ListItem>
+        {description && description.map((info) =>
+          <ListItem key={info.id}>{info.title}: {info.description}</ListItem>,
         )}
       </List>
     </Container>

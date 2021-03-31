@@ -1,8 +1,8 @@
 import React from 'react';
-import {makeStyles} from "@material-ui/core/styles";
-import {useDispatch, useSelector} from "react-redux";
-import {setSelectedBrand} from "../redux/actions/deviceActions";
-import {List, ListItem, ListItemText} from "@material-ui/core";
+import {makeStyles} from '@material-ui/core/styles';
+import {useDispatch, useSelector} from 'react-redux';
+import {setSelectedBrand} from '../redux/actions/deviceActions';
+import {List, ListItem, ListItemText} from '@material-ui/core';
 
 const BrandBar = () => {
   const useStyles = makeStyles((theme) => ({
@@ -21,12 +21,12 @@ const BrandBar = () => {
   const dispatch = useDispatch();
   const {brands, selectedBrand} = useSelector(({devices}) => devices);
   const onBrandClick = (brand) => {
-    dispatch(setSelectedBrand(brand))
-  }
+    dispatch(setSelectedBrand(brand));
+  };
 
   return (
     <List component="ul" className={classes.list}>
-      {brands && brands.map(brand =>
+      {brands && brands.map((brand) =>
         <ListItem
           button
           className={classes.text}
@@ -35,7 +35,7 @@ const BrandBar = () => {
           selected={brand.id === selectedBrand.id}
         >
           <ListItemText primary={brand.name}/>
-        </ListItem>
+        </ListItem>,
       )}
     </List>
   );

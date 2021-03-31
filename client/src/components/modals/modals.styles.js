@@ -1,4 +1,4 @@
-import {makeStyles} from "@material-ui/core";
+import {makeStyles} from '@material-ui/core';
 
 export const useStyles = makeStyles((theme) => ({
   modal: {
@@ -12,16 +12,16 @@ export const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing(3),
-    transform: 'translate(-50%, -50%)'
+    transform: 'translate(-50%, -50%)',
   },
   input: {
     width: '100%',
-    marginBottom: 20
+    marginBottom: 20,
   },
   select: {
-    marginBottom: 20
+    marginBottom: 20,
   },
   btnContainer: {
-    marginTop: 20
-  }
+    marginTop: 20,
+  },
 }));
