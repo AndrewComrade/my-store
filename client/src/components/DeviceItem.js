@@ -1,5 +1,12 @@
 import React from 'react';
-import {Card, CardContent, CardMedia, Grid, makeStyles, Typography} from '@material-ui/core';
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Grid,
+  makeStyles,
+  Typography,
+} from '@material-ui/core';
 import {useHistory} from 'react-router';
 import {DEVICE_ROUTE} from '../utils/consts';
 

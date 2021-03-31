@@ -6,7 +6,7 @@ import {useSelector} from 'react-redux';
 
 const AppRouter = () => {
   const {isAuth} = useSelector(({user}) => user);
-  const {devices} = useSelector(({devices}) => devices);
+  // const {devices} = useSelector(({devices}) => devices);
 
   return (
     <Switch>

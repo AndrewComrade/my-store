@@ -60,9 +60,18 @@ const Admin = () => {
           </ListItemText>
         </ListItem>
       </List>
-      <CreateType open={openTypeModal} handleCloseModal={() => handleCloseModal('type')}/>
-      <CreateBrand open={openBrandModal} handleCloseModal={() => handleCloseModal('brand')}/>
-      <CreateDevice open={openDeviceModal} handleCloseModal={() => handleCloseModal('device')}/>
+      <CreateType
+        open={openTypeModal}
+        handleCloseModal={() => handleCloseModal('type')}
+      />
+      <CreateBrand
+        open={openBrandModal}
+        handleCloseModal={() => handleCloseModal('brand')}
+      />
+      <CreateDevice
+        open={openDeviceModal}
+        handleCloseModal={() => handleCloseModal('device')}
+      />
     </Container>
   );
 };

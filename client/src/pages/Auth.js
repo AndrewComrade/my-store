@@ -5,7 +5,7 @@ import {useHistory, useLocation} from 'react-router';
 import {LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE} from '../utils/consts';
 import {Link} from 'react-router-dom';
 import {login, registration} from '../http/userAPI';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {setAuth, setUser} from '../redux/actions/userActions';
 
 const Auth = () => {
@@ -69,12 +69,34 @@ const Auth = () => {
   return (
     <Container>
       <form className={classes.form} noValidate autoComplete="off">
-        <Typography className={classes.text}>{isLogin ? 'Авторизация' : 'Регистрация'}</Typography>
-        <TextField className={classes.input} id="email" label="Your Email" variant="filled" value={email}
-          onChange={onEmailChange}/>
-        <TextField className={classes.input} type="password" id="password" label="Your Password" variant="filled" value={password}
-          onChange={onPasswordChange}/>
-        <Grid container alignItems="center" justify="space-between" style={{marginTop: 20}}>
+        <Typography
+          className={classes.text}
+        >
+          {isLogin ? 'Авторизация' : 'Регистрация'}
+        </Typography>
+        <TextField
+          className={classes.input}
+          id="email"
+          label="Your Email"
+          variant="filled"
+          value={email}
+          onChange={onEmailChange}
+        />
+        <TextField
+          className={classes.input}
+          type="password"
+          id="password"
+          label="Your Password"
+          variant="filled"
+          value={password}
+          onChange={onPasswordChange}
+        />
+        <Grid
+          container
+          alignItems="center"
+          justify="space-between"
+          style={{marginTop: 20}}
+        >
           <Grid item>
             {isLogin ?
               <Typography>Нет аккаунта? <Link to={REGISTRATION_ROUTE}>Зарегистрируйся!</Link></Typography> :
@@ -82,7 +104,11 @@ const Auth = () => {
             }
           </Grid>
           <Grid item>
-            <Button color="inherit" variant="outlined" onClick={onLoginClick}>{isLogin ? 'Войти' : 'Регистрация'}</Button>
+            <Button
+              color="inherit"
+              variant="outlined"
+              onClick={onLoginClick}>{isLogin ? 'Войти' : 'Регистрация'}
+            </Button>
           </Grid>
         </Grid>
       </form>

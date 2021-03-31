@@ -1,5 +1,12 @@
 import React from 'react';
-import {AppBar, Button, Container, Grid, IconButton, Toolbar} from '@material-ui/core';
+import {
+  AppBar,
+  Button,
+  Container,
+  Grid,
+  IconButton,
+  Toolbar,
+} from '@material-ui/core';
 import {PhoneIphone, ShoppingCart} from '@material-ui/icons';
 import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
