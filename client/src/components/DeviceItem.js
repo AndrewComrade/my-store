@@ -40,7 +40,7 @@ const DeviceItem = ({id, img, name, price, rating}) => {
       <Card variant="outlined" onClick={onCardClick}>
         <CardMedia
           className={classes.media}
-          image={img}
+          image={process.env.REACT_APP_API_URL + img}
           title="Paella dish"
         />
         <CardContent>

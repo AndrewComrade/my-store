@@ -2,7 +2,7 @@ import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import {useDispatch, useSelector} from 'react-redux';
 import {setSelectedBrand} from '../redux/actions/deviceActions';
-import {List, ListItem, ListItemText} from '@material-ui/core';
+import {List, ListItem, ListItemText, Typography} from '@material-ui/core';
 
 const BrandBar = () => {
   const useStyles = makeStyles((theme) => ({
@@ -26,6 +26,7 @@ const BrandBar = () => {
 
   return (
     <List component="ul" className={classes.list}>
+      <Typography>Brands:</Typography>
       {brands && brands.map((brand) =>
         <ListItem
           button

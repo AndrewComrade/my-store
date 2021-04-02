@@ -12,36 +12,7 @@ const initialState = {
   brands: [],
   selectedType: {},
   selectedBrand: {},
-  devices: [
-    {
-      id: 1,
-      name: 'Aphone',
-      price: 2500,
-      rating: 5,
-      img: 'https://i.pinimg.com/originals/fb/d5/4b/fbd54b0c65fcada0999a48b6eb457ff7.jpg',
-    },
-    {
-      id: 2,
-      name: 'Bphone',
-      price: 3500,
-      rating: 4,
-      img: 'https://i.pinimg.com/originals/fb/d5/4b/fbd54b0c65fcada0999a48b6eb457ff7.jpg',
-    },
-    {
-      id: 3,
-      name: 'Cphone',
-      price: 4500,
-      rating: 3,
-      img: 'https://i.pinimg.com/originals/fb/d5/4b/fbd54b0c65fcada0999a48b6eb457ff7.jpg',
-    },
-    {
-      id: 4,
-      name: 'Dphone',
-      price: 5500,
-      rating: 2,
-      img: 'https://i.pinimg.com/originals/fb/d5/4b/fbd54b0c65fcada0999a48b6eb457ff7.jpg',
-    },
-  ],
+  devices: [],
 };
 
 export const deviceReducer = createReducer(initialState, (builder) => {

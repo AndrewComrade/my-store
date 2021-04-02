@@ -8,7 +8,7 @@ const DeviceList = () => {
 
   return (
     <Grid container spacing={2}>
-      {devices && devices.map((device) =>
+      {devices.length > 0 && devices.map((device) =>
         <DeviceItem key={device.id} {...device} />,
       )}
     </Grid>

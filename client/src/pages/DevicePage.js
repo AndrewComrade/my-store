@@ -1,43 +1,44 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import {useParams} from 'react-router';
 import {
   Button,
   Container,
   Grid,
   List,
   ListItem,
-  Typography} from '@material-ui/core';
+  Typography,
+} from '@material-ui/core';
+import {fetchDevice} from '../http/deviceAPI';
 
 const DevicePage = () => {
-  const description = [
-    {id: 1, title: 'Оперативная память', description: '5 гб'},
-    {id: 2, title: 'Камера', description: '12 мп'},
-    {id: 3, title: 'Процессор', description: 'Пентиум 3'},
-    {id: 4, title: 'Кол-во ядер', description: '2'},
-    {id: 5, title: 'Аккумулятор', description: '4000'},
-  ];
+  const [device, setDevice] = useState({info: []});
+  const {id} = useParams();
+
+  useEffect(() => {
+    fetchDevice(id).then((data) => setDevice(data));
+  }, []);
 
   return (
     <Container>
       <Grid container spacing={2} style={{marginTop: 20, marginBottom: 20}}>
-        <Grid item xs={4}>
-          <img src="" alt=""/>
-          Image
+        <Grid item xs={6}>
+          <img src={process.env.REACT_APP_API_URL + device.img} alt=""/>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={3}>
           <Typography>
             RATING: 5
           </Typography>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={3}>
           <Typography>
-            PRICE: 10 000
+            {device.price} р.
           </Typography>
           <Button variant='outlined'>Добавить в корзину</Button>
         </Grid>
       </Grid>
       <h4>Характеристики:</h4>
       <List>
-        {description && description.map((info) =>
+        {device && device.info.map((info) =>
           <ListItem key={info.id}>{info.title}: {info.description}</ListItem>,
         )}
       </List>

@@ -1,11 +1,19 @@
 import React, {useState} from 'react';
 import {Button, Grid, Modal, TextField} from '@material-ui/core';
 import {useStyles} from './modals.styles';
+import {createType} from '../../http/deviceAPI';
 
 const CreateType = ({open, handleCloseModal}) => {
   const classes = useStyles();
 
   const [type, setType] = useState('');
+
+  const addType = () => {
+    createType({name: type}).then((data) => {
+      setType('');
+      handleCloseModal();
+    });
+  };
 
   const onInputChange = (e) => {
     setType(e.target.value);
@@ -25,7 +33,7 @@ const CreateType = ({open, handleCloseModal}) => {
         </form>
       </Grid>
       <Grid container justify="space-between" className={classes.btnContainer}>
-        <Button variant='outlined'>Добавить тип</Button>
+        <Button variant='outlined' onClick={addType}>Добавить тип</Button>
         <Button variant='outlined' onClick={handleCloseModal}>Отмена</Button>
       </Grid>
     </div>

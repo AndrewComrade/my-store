@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Box,
   Button, FormControl,
@@ -9,35 +9,65 @@ import {
   TextField,
   Typography,
 } from '@material-ui/core';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {useStyles} from './modals.styles';
+import {createDevice, fetchBrands, fetchTypes} from '../../http/deviceAPI';
+import {setBrands, setSelectedBrand, setSelectedType, setTypes} from '../../redux/actions/deviceActions';
 
 const CreateDevice = ({open, handleCloseModal}) => {
   const classes = useStyles();
 
-  const {brands, types} = useSelector(({devices}) => devices);
+  const dispatch = useDispatch();
 
-  const [type, setType] = useState('');
-  const [brand, setBrand] = useState('');
+  useEffect(() => {
+    fetchTypes().then((data) => dispatch(setTypes(data)));
+    fetchBrands().then((data) => dispatch(setBrands(data)));
+  }, []);
+
+  const {brands, types, selectedType, selectedBrand} = useSelector(({devices}) => devices);
+
   const [name, setName] = useState('');
+  const [file, setFile] = useState(null);
   const [price, setPrice] = useState(0);
-
   const [info, setInfo] = useState([]);
 
   const addInfo = () => {
     setInfo([...info, {title: '', description: '', number: Date.now()}]);
   };
 
+  const changeInfo = (key, value, number) => {
+    setInfo(info.map((i) => i.number === number ? {...i, [key]: value} : i));
+  };
+
+  const addDevice = () => {
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('price', `${price}`);
+    formData.append('img', file);
+    formData.append('typeId', selectedType.id);
+    formData.append('brandId', selectedBrand.id);
+    formData.append('info', JSON.stringify(info));
+    createDevice(formData).then((data) => {
+      handleCloseModal();
+      dispatch(setSelectedType({}));
+      dispatch(setSelectedBrand({}));
+    });
+  };
+
   const removeInfo = (number) => {
     setInfo(info.filter((i) => i.number !== number));
   };
 
-  const handleTypeChange = (e) => {
-    setType(e.target.value);
+  const onTypeChange = (type) => {
+    dispatch(setSelectedType(type));
   };
 
-  const handleBrandChange = (e) => {
-    setBrand(e.target.value);
+  const onBrandChange = (brand) => {
+    dispatch(setSelectedBrand(brand));
+  };
+
+  const onFileChange = (e) => {
+    setFile(e.target.files[0]);
   };
 
   const onNameChange = (e) => {
@@ -60,13 +90,10 @@ const CreateDevice = ({open, handleCloseModal}) => {
         <Grid container direction="column">
           <FormControl>
             <InputLabel>Device type</InputLabel>
-            <Select
-              className={classes.select}
-              onChange={handleTypeChange}
-              value={type}
-            >
+            <Select className={classes.select}>
               {types && types.map((type) =>
                 <MenuItem
+                  onClick={() => onTypeChange(type)}
                   key={type.id}
                   value={type.name}
                 >
@@ -78,13 +105,10 @@ const CreateDevice = ({open, handleCloseModal}) => {
 
           <FormControl>
             <InputLabel>Device brand</InputLabel>
-            <Select
-              className={classes.select}
-              onChange={handleBrandChange}
-              value={brand}
-            >
+            <Select className={classes.select}>
               {brands && brands.map((brand) =>
                 <MenuItem
+                  onClick={() => onBrandChange(brand)}
                   key={brand.id}
                   value={brand.name}
                 >
@@ -110,6 +134,10 @@ const CreateDevice = ({open, handleCloseModal}) => {
             label="Введите стоимость устройства"
             className={classes.input}
           />
+          <Button variant="contained" component="label">
+            {file ? file.name : 'Upload File'}
+            <input type="file" hidden onChange={onFileChange}/>
+          </Button>
           <Typography component="h4">Характеристики:</Typography>
         </Grid>
         <Grid container direction="column">
@@ -128,10 +156,20 @@ const CreateDevice = ({open, handleCloseModal}) => {
                 justify="space-between"
                 alignItems="center">
                 <Grid item xs={4}>
-                  <TextField variant="outlined" label="Название свойства"/>
+                  <TextField
+                    value={i.title}
+                    variant="outlined"
+                    label="Название свойства"
+                    onChange={(e) => changeInfo('title', e.target.value, i.number)}
+                  />
                 </Grid>
                 <Grid item xs={4}>
-                  <TextField variant="outlined" label="Описание свойства"/>
+                  <TextField
+                    value={i.description}
+                    variant="outlined"
+                    label="Описание свойства"
+                    onChange={(e) => changeInfo('description', e.target.value, i.number)}
+                  />
                 </Grid>
                 <Grid container item xs={4}>
                   <Button onClick={() => removeInfo(i.number)}>Удалить</Button>
@@ -142,7 +180,7 @@ const CreateDevice = ({open, handleCloseModal}) => {
         </Grid>
       </form>
       <Grid container justify="space-between" className={classes.btnContainer}>
-        <Button variant='outlined'>Добавить устройство</Button>
+        <Button variant='outlined' onClick={addDevice}>Добавить устройство</Button>
         <Button variant='outlined' onClick={handleCloseModal}>Отмена</Button>
       </Grid>
     </div>
