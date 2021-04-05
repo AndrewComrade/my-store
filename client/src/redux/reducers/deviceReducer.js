@@ -2,8 +2,11 @@ import {createReducer} from '@reduxjs/toolkit';
 import {
   setBrands,
   setDevices,
+  setLimit,
+  setPage,
   setSelectedBrand,
   setSelectedType,
+  setTotalCount,
   setTypes,
 } from '../actions/deviceActions';
 
@@ -13,6 +16,9 @@ const initialState = {
   selectedType: {},
   selectedBrand: {},
   devices: [],
+  page: 1,
+  totalCount: 0,
+  limit: 1,
 };
 
 export const deviceReducer = createReducer(initialState, (builder) => {
@@ -28,8 +34,19 @@ export const deviceReducer = createReducer(initialState, (builder) => {
       })
       .addCase(setSelectedType, (state, action) => {
         state.selectedType = action.payload;
+        state.page = 1;
       })
       .addCase(setSelectedBrand, (state, action) => {
         state.selectedBrand = action.payload;
+        state.page = 1;
+      })
+      .addCase(setPage, (state, action) => {
+        state.page = action.payload;
+      })
+      .addCase(setTotalCount, (state, action) => {
+        state.totalCount = action.payload;
+      })
+      .addCase(setLimit, (state, action) => {
+        state.limit = action.payload;
       });
 });

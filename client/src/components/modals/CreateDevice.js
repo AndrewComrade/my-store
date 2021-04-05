@@ -138,15 +138,8 @@ const CreateDevice = ({open, handleCloseModal}) => {
             {file ? file.name : 'Upload File'}
             <input type="file" hidden onChange={onFileChange}/>
           </Button>
-          <Typography component="h4">Характеристики:</Typography>
         </Grid>
         <Grid container direction="column">
-          <Button
-            variant="outlined"
-            onClick={addInfo}
-          >
-            Добавить свойство
-          </Button>
           {info && info.map((i) =>
             <Box mt={2} key={i.number}>
               <Grid
@@ -177,6 +170,9 @@ const CreateDevice = ({open, handleCloseModal}) => {
               </Grid>
             </Box>,
           )}
+          <Button variant="outlined" onClick={addInfo}>
+            Добавить свойство
+          </Button>
         </Grid>
       </form>
       <Grid container justify="space-between" className={classes.btnContainer}>
