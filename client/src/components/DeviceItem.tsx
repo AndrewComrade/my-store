@@ -8,9 +8,10 @@ import {
   Typography,
 } from '@material-ui/core';
 import {useHistory} from 'react-router';
-import {DEVICE_ROUTE} from '../utils/consts';
+import {Routes} from '../routes';
+import {IDevice} from '../types/devices';
 
-const DeviceItem = ({id, img, name, price, rating}) => {
+const DeviceItem: React.FC<IDevice> = ({id, img, name, price, rating}) => {
   const useStyles = makeStyles((theme) => ({
     media: {
       height: 0,
@@ -32,7 +33,7 @@ const DeviceItem = ({id, img, name, price, rating}) => {
   const history = useHistory();
 
   const onCardClick = () => {
-    history.push(DEVICE_ROUTE + '/' + id);
+    history.push(Routes.DEVICE_ROUTE + '/' + id);
   };
 
   return (

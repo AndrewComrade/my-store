@@ -3,14 +3,14 @@ import 'normalize.css';
 import React, {useEffect, useState} from 'react';
 import {BrowserRouter} from 'react-router-dom';
 import AppRouter from './components/AppRouter';
-import {useDispatch} from 'react-redux';
 import NavBar from './components/NavBar';
 import {check} from './http/userAPI';
 import {setAuth, setUser} from './redux/actions/userActions';
 import {CircularProgress, Grid} from '@material-ui/core';
+import {useAppDispatch} from './types/hooks';
 
 const App = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

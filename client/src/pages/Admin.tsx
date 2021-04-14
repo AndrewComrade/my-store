@@ -1,15 +1,15 @@
 import React, {useState} from 'react';
 import {Container, List, ListItem, ListItemText} from '@material-ui/core';
-import CreateType from '../components/modals/CreateType';
-import CreateDevice from '../components/modals/CreateDevice';
-import CreateBrand from '../components/modals/CreateBrand';
+// import CreateType from '../components/modals/CreateType';
+// import CreateDevice from '../components/modals/CreateDevice';
+// import CreateBrand from '../components/modals/CreateBrand';
 
-const Admin = () => {
+const Admin: React.FC = () => {
   const [openTypeModal, setOpenTypeModal] = useState(false);
   const [openBrandModal, setOpenBrandModal] = useState(false);
   const [openDeviceModal, setOpenDeviceModal] = useState(false);
 
-  const handleOpenModal = (modalType) => {
+  const handleOpenModal = (modalType: string) => {
     switch (modalType) {
       case 'type':
         setOpenTypeModal(true);
@@ -25,7 +25,7 @@ const Admin = () => {
     }
   };
 
-  const handleCloseModal = (modalType) => {
+  const handleCloseModal = (modalType: string) => {
     switch (modalType) {
       case 'type':
         setOpenTypeModal(false);
@@ -60,18 +60,18 @@ const Admin = () => {
           </ListItemText>
         </ListItem>
       </List>
-      <CreateType
-        open={openTypeModal}
-        handleCloseModal={() => handleCloseModal('type')}
-      />
-      <CreateBrand
-        open={openBrandModal}
-        handleCloseModal={() => handleCloseModal('brand')}
-      />
-      <CreateDevice
-        open={openDeviceModal}
-        handleCloseModal={() => handleCloseModal('device')}
-      />
+      {/*<CreateType*/}
+      {/*  open={openTypeModal}*/}
+      {/*  handleCloseModal={() => handleCloseModal('type')}*/}
+      {/*/>*/}
+      {/*<CreateBrand*/}
+      {/*  open={openBrandModal}*/}
+      {/*  handleCloseModal={() => handleCloseModal('brand')}*/}
+      {/*/>*/}
+      {/*<CreateDevice*/}
+      {/*  open={openDeviceModal}*/}
+      {/*  handleCloseModal={() => handleCloseModal('device')}*/}
+      {/*/>*/}
     </Container>
   );
 };

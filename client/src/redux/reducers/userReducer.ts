@@ -1,9 +1,10 @@
 import {createReducer} from '@reduxjs/toolkit';
 import {setAuth, setUser} from '../actions/userActions';
+import {UserState} from '../../types/user';
 
-const initialState = {
+const initialState: UserState = {
   isAuth: false,
-  user: {},
+  user: false,
 };
 
 export const userReducer = createReducer(initialState, (builder) => {

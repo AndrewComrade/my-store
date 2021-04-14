@@ -7,35 +7,40 @@ import {
   Modal,
   Select,
   TextField,
-  Typography,
 } from '@material-ui/core';
-import {useDispatch, useSelector} from 'react-redux';
 import {useStyles} from './modals.styles';
 import {createDevice, fetchBrands, fetchTypes} from '../../http/deviceAPI';
 import {setBrands, setSelectedBrand, setSelectedType, setTypes} from '../../redux/actions/deviceActions';
+import {useAppDispatch, useAppSelector} from "../../types/hooks";
+import {IInfo, IOptions} from "../../types/devices";
 
-const CreateDevice = ({open, handleCloseModal}) => {
+interface CreateDeviceProps {
+  open: boolean;
+  handleCloseModal: () => void;
+}
+
+const CreateDevice: React.FC<CreateDeviceProps> = ({open, handleCloseModal}) => {
   const classes = useStyles();
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     fetchTypes().then((data) => dispatch(setTypes(data)));
     fetchBrands().then((data) => dispatch(setBrands(data)));
   }, []);
 
-  const {brands, types, selectedType, selectedBrand} = useSelector(({devices}) => devices);
+  const {brands, types, selectedType, selectedBrand} = useAppSelector(({devices}) => devices);
 
-  const [name, setName] = useState('');
+  const [name, setName] = useState<string>('');
   const [file, setFile] = useState(null);
-  const [price, setPrice] = useState(0);
-  const [info, setInfo] = useState([]);
+  const [price, setPrice] = useState<number>(0);
+  const [info, setInfo] = useState<IInfo[]>([]);
 
   const addInfo = () => {
     setInfo([...info, {title: '', description: '', number: Date.now()}]);
   };
 
-  const changeInfo = (key, value, number) => {
+  const changeInfo = (key: string, value: string | number | IInfo[], number: number) => {
     setInfo(info.map((i) => i.number === number ? {...i, [key]: value} : i));
   };
 
@@ -49,20 +54,20 @@ const CreateDevice = ({open, handleCloseModal}) => {
     formData.append('info', JSON.stringify(info));
     createDevice(formData).then((data) => {
       handleCloseModal();
-      dispatch(setSelectedType({}));
-      dispatch(setSelectedBrand({}));
+      dispatch(setSelectedType(null));
+      dispatch(setSelectedBrand(null));
     });
   };
 
-  const removeInfo = (number) => {
+  const removeInfo = (number: number) => {
     setInfo(info.filter((i) => i.number !== number));
   };
 
-  const onTypeChange = (type) => {
+  const onTypeChange = (type: IOptions) => {
     dispatch(setSelectedType(type));
   };
 
-  const onBrandChange = (brand) => {
+  const onBrandChange = (brand: IOptions) => {
     dispatch(setSelectedBrand(brand));
   };
 
@@ -70,11 +75,11 @@ const CreateDevice = ({open, handleCloseModal}) => {
     setFile(e.target.files[0]);
   };
 
-  const onNameChange = (e) => {
+  const onNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
   };
 
-  const onPriceChange = (e) => {
+  const onPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPrice(e.target.value);
   };
 

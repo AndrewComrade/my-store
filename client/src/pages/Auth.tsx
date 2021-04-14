@@ -1,14 +1,14 @@
-import React, {useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import {Typography, TextField, Grid, Button, Container} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 import {useHistory, useLocation} from 'react-router';
-import {LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE} from '../utils/consts';
+import {Routes} from '../routes';
 import {Link} from 'react-router-dom';
 import {login, registration} from '../http/userAPI';
 import {useDispatch} from 'react-redux';
 import {setAuth, setUser} from '../redux/actions/userActions';
 
-const Auth = () => {
+const Auth: React.FC = () => {
   const useStyles = makeStyles((theme) => ({
     form: {
       padding: 25,
@@ -35,7 +35,7 @@ const Auth = () => {
 
   const location = useLocation();
   const history = useHistory();
-  const isLogin = location.pathname === LOGIN_ROUTE;
+  const isLogin = location.pathname === Routes.LOGIN_ROUTE;
 
   const dispatch = useDispatch();
 
@@ -52,17 +52,17 @@ const Auth = () => {
       }
       dispatch(setUser(data));
       dispatch(setAuth(true));
-      history.push(SHOP_ROUTE);
+      history.push(Routes.SHOP_ROUTE);
     } catch (e) {
       alert(e.response.data.message);
     }
   };
 
-  const onEmailChange = (e) => {
+  const onEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
 
-  const onPasswordChange = (e) => {
+  const onPasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
     setPassword((e.target.value));
   };
 
@@ -99,8 +99,8 @@ const Auth = () => {
         >
           <Grid item>
             {isLogin ?
-              <Typography>Нет аккаунта? <Link to={REGISTRATION_ROUTE}>Зарегистрируйся!</Link></Typography> :
-              <Typography>Есть аккаунт? <Link to={LOGIN_ROUTE}>Войти</Link></Typography>
+              <Typography>Нет аккаунта? <Link to={Routes.REGISTRATION_ROUTE}>Зарегистрируйся!</Link></Typography> :
+              <Typography>Есть аккаунт? <Link to={Routes.LOGIN_ROUTE}>Войти</Link></Typography>
             }
           </Grid>
           <Grid item>

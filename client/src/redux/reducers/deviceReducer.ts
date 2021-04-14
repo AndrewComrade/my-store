@@ -1,4 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
+import {DevicesState} from '../../types/devices';
 import {
   setBrands,
   setDevices,
@@ -10,15 +11,15 @@ import {
   setTypes,
 } from '../actions/deviceActions';
 
-const initialState = {
+const initialState: DevicesState = {
   types: [],
   brands: [],
-  selectedType: {},
-  selectedBrand: {},
   devices: [],
+  selectedType: null,
+  selectedBrand: null,
   page: 1,
   totalCount: 0,
-  limit: 1,
+  limit: 2,
 };
 
 export const deviceReducer = createReducer(initialState, (builder) => {

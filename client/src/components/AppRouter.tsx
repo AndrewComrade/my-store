@@ -1,12 +1,11 @@
 import React from 'react';
 import {Switch, Route, Redirect} from 'react-router-dom';
 import {authRoutes, publicRoutes} from '../routes';
-import {SHOP_ROUTE} from '../utils/consts';
-import {useSelector} from 'react-redux';
+import {Routes} from '../routes';
+import {useAppSelector} from '../types/hooks';
 
 const AppRouter = () => {
-  const {isAuth} = useSelector(({user}) => user);
-  // const {devices} = useSelector(({devices}) => devices);
+  const {isAuth} = useAppSelector(({user}) => user);
 
   return (
     <Switch>
@@ -16,7 +15,7 @@ const AppRouter = () => {
       {publicRoutes.map(({path, Component}) =>
         <Route key={path} path={path} component={Component} exact />,
       )}
-      <Redirect to={SHOP_ROUTE} />
+      <Redirect to={Routes.SHOP_ROUTE} />
     </Switch>
   );
 };

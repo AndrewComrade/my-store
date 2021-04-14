@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {
   AppBar,
   Button,
@@ -9,13 +9,13 @@ import {
 } from '@material-ui/core';
 import {PhoneIphone, ShoppingCart} from '@material-ui/icons';
 import {Link} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
-import {ADMIN_ROUTE, SHOP_ROUTE} from '../utils/consts';
+import {Routes} from '../routes';
 import {setAuth} from '../redux/actions/userActions';
+import {useAppDispatch, useAppSelector} from '../types/hooks';
 
-const NavBar = () => {
-  const {isAuth} = useSelector(({user}) => user);
-  const dispatch = useDispatch();
+const NavBar: React.FC = () => {
+  const {isAuth} = useAppSelector((state) => state.user);
+  const dispatch = useAppDispatch();
 
   const onExitClick = () => {
     dispatch(setAuth(false));
@@ -25,14 +25,14 @@ const NavBar = () => {
     <Container maxWidth={false} style={{margin: 0, padding: 0}}>
       <AppBar position="static">
         <Toolbar>
-          <Link to={SHOP_ROUTE} style={{color: '#fff'}}>
+          <Link to={Routes.SHOP_ROUTE} style={{color: '#fff'}}>
             <PhoneIphone/>
           </Link>
           <Grid container justify="flex-end">
             {isAuth ?
               <Grid item>
                 <Link
-                  to={ADMIN_ROUTE}
+                  to={Routes.ADMIN_ROUTE}
                   style={{color: '#fff', textDecoration: 'none'}}
                 >
                   <Button color="inherit">Admin</Button>
