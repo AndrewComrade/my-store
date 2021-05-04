@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 import {useStyles} from './modals.styles';
 import {createDevice, fetchBrands, fetchTypes} from '../../http/deviceAPI';
-import {setBrands, setSelectedBrand, setSelectedType, setTypes} from '../../redux/actions/deviceActions';
+import {setBrands, setSelectedBrand, setSelectedType, setTypes} from '../../store/actions/deviceActions';
 import {useAppDispatch, useAppSelector} from "../../types/hooks";
 import {IInfo, IOptions} from "../../types/devices";
 

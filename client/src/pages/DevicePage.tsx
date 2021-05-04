@@ -1,54 +1,64 @@
-import React, {useEffect, useState} from 'react';
-import {useParams} from 'react-router';
+import React, { useEffect } from 'react';
 import {
-  Button,
-  Container,
-  Grid,
-  List,
-  ListItem,
-  Typography,
+    CardMedia,
+    Grid,
+    GridProps,
+    List,
+    ListItem,
+    styled,
+    Typography,
 } from '@material-ui/core';
-import {fetchDevice} from '../http/deviceAPI';
-import {IDevice} from '../types/devices';
+import { useParams } from 'react-router';
+import { useActions } from '~/hooks/useActions';
+import { useSelector } from '~/hooks/useTypedSelector';
 
 interface ParamTypes {
-  id?: string;
+    id: string;
 }
 
+const DevicePageWrapper = styled((props: GridProps) => <Grid {...props} />)({
+    paddingTop: 50,
+});
+
 const DevicePage: React.FC = () => {
-  const [device, setDevice] = useState<IDevice | null>(null);
-  const {id} = useParams<ParamTypes>();
+    const { fetchDevice } = useActions();
+    const { id } = useParams<ParamTypes>();
+    const { device, error } = useSelector((state) => state.devices);
 
-  useEffect(() => {
-    fetchDevice(id).then((data) => setDevice(data));
-  }, []);
+    useEffect(() => {
+        fetchDevice(id);
+    }, []);
 
-  return (
-    <Container>
-      <Grid container spacing={2} style={{marginTop: 20, marginBottom: 20}}>
-        <Grid item xs={6}>
-          {device && <img src={process.env.REACT_APP_API_URL + device.img} alt=""/>}
-        </Grid>
-        <Grid item xs={3}>
-          <Typography>
-            RATING: 5
-          </Typography>
-        </Grid>
-        <Grid item xs={3}>
-          <Typography>
-            {device && device.price} р.
-          </Typography>
-          <Button variant='outlined'>Добавить в корзину</Button>
-        </Grid>
-      </Grid>
-      <h4>Характеристики:</h4>
-      <List>
-        {device && device.info && device.info.map((info) =>
-          <ListItem key={info.id}>{info.title}: {info.description}</ListItem>,
-        )}
-      </List>
-    </Container>
-  );
+    if (!device) {
+        return <Grid>{error}</Grid>;
+    }
+
+    return (
+        <DevicePageWrapper container spacing={2}>
+            <Grid item xs={6}>
+                <CardMedia
+                    src={process.env.REACT_APP_API_URL + device.img}
+                    component="img"
+                />
+            </Grid>
+            <Grid item xs={6}>
+                <List>
+                    <ListItem>
+                        <Typography variant="h6">Name:</Typography>
+                        <Typography variant="h6">{device.name}</Typography>
+                    </ListItem>
+                    <ListItem>
+                        <Typography variant="h6">Rating:</Typography>
+                        <Typography variant="h6">{device.rating}</Typography>
+                    </ListItem>
+                    <ListItem>
+                        <Typography variant="h6">Price:</Typography>
+                        <Typography variant="h6">{device.price}</Typography>
+                    </ListItem>
+                </List>
+            </Grid>
+        </DevicePageWrapper>
+    );
 };
 
 export default DevicePage;

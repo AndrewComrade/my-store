@@ -1,63 +1,51 @@
-import React, {FC} from 'react';
+import React from 'react';
 import {
-  AppBar,
-  Button,
-  Container,
-  Grid,
-  IconButton,
-  Toolbar,
+    AppBar,
+    Button,
+    createStyles,
+    IconButton,
+    makeStyles,
+    Theme,
+    Toolbar,
+    Typography,
 } from '@material-ui/core';
-import {PhoneIphone, ShoppingCart} from '@material-ui/icons';
-import {Link} from 'react-router-dom';
-import {Routes} from '../routes';
-import {setAuth} from '../redux/actions/userActions';
-import {useAppDispatch, useAppSelector} from '../types/hooks';
+import MenuIcon from '@material-ui/icons/Menu';
 
-const NavBar: React.FC = () => {
-  const {isAuth} = useAppSelector((state) => state.user);
-  const dispatch = useAppDispatch();
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        root: {
+            flexGrow: 1,
+        },
+        menuButton: {
+            marginRight: theme.spacing(2),
+        },
+        title: {
+            flexGrow: 1,
+        },
+    })
+);
 
-  const onExitClick = () => {
-    dispatch(setAuth(false));
-  };
+const NavBar = () => {
+    const classes = useStyles();
 
-  return (
-    <Container maxWidth={false} style={{margin: 0, padding: 0}}>
-      <AppBar position="static">
-        <Toolbar>
-          <Link to={Routes.SHOP_ROUTE} style={{color: '#fff'}}>
-            <PhoneIphone/>
-          </Link>
-          <Grid container justify="flex-end">
-            {isAuth ?
-              <Grid item>
-                <Link
-                  to={Routes.ADMIN_ROUTE}
-                  style={{color: '#fff', textDecoration: 'none'}}
+    return (
+        <AppBar position="static">
+            <Toolbar>
+                <IconButton
+                    edge="start"
+                    className={classes.menuButton}
+                    color="inherit"
+                    aria-label="menu"
                 >
-                  <Button color="inherit">Admin</Button>
-                </Link>
-                <IconButton color="inherit" aria-label="shopping-cart">
-                  <ShoppingCart/>
+                    <MenuIcon />
                 </IconButton>
-                <Button color="inherit" onClick={onExitClick}>Exit</Button>
-              </Grid> :
-              <Grid item>
-                <Button color="inherit">
-                  <Link
-                    style={{color: '#fff', textDecoration: 'none'}}
-                    to='/login'
-                  >
-                    Sign In
-                  </Link>
-                </Button>
-              </Grid>
-            }
-          </Grid>
-        </Toolbar>
-      </AppBar>
-    </Container>
-  );
+                <Typography variant="h6" className={classes.title}>
+                    News
+                </Typography>
+                <Button color="inherit">Login</Button>
+            </Toolbar>
+        </AppBar>
+    );
 };
 
 export default NavBar;

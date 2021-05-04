@@ -1,41 +1,28 @@
 import 'normalize.css';
 
-import React, {useEffect, useState} from 'react';
-import {BrowserRouter} from 'react-router-dom';
-import AppRouter from './components/AppRouter';
-import NavBar from './components/NavBar';
-import {check} from './http/userAPI';
-import {setAuth, setUser} from './redux/actions/userActions';
-import {CircularProgress, Grid} from '@material-ui/core';
-import {useAppDispatch} from './types/hooks';
+import React, { useEffect } from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import AppRouter from '~/components/AppRouter';
+import NavBar from '~/components/NavBar';
+import { useActions } from '~/hooks/useActions';
+import { Container } from '@material-ui/core';
 
 const App = () => {
-  const dispatch = useAppDispatch();
-  const [loading, setLoading] = useState(true);
+    const { fetchTypes, fetchBrands } = useActions();
 
-  useEffect(() => {
-    check()
-        .then((data) => {
-          dispatch(setUser(true));
-          dispatch(setAuth(true));
-        })
-        .finally(() => setLoading(false));
-  }, []);
+    useEffect(() => {
+        fetchTypes();
+        fetchBrands();
+    }, []);
 
-  if (loading) {
     return (
-      <Grid container alignItems="center" justify="center">
-        <CircularProgress size={100} color="secondary"/>
-      </Grid>
+        <BrowserRouter>
+            <NavBar />
+            <Container>
+                <AppRouter />
+            </Container>
+        </BrowserRouter>
     );
-  }
-
-  return (
-    <BrowserRouter>
-      <NavBar/>
-      <AppRouter/>
-    </BrowserRouter>
-  );
 };
 
 export default App;

@@ -1,23 +1,32 @@
 import React from 'react';
-import {Switch, Route, Redirect} from 'react-router-dom';
-import {authRoutes, publicRoutes} from '../routes';
-import {Routes} from '../routes';
-import {useAppSelector} from '../types/hooks';
+import { Redirect, Route, Switch } from 'react-router';
+import { authRoutes, publicRoutes, Routes } from '~/routes';
+import { useSelector } from '~/hooks/useTypedSelector';
 
-const AppRouter = () => {
-  const {isAuth} = useAppSelector(({user}) => user);
-
-  return (
-    <Switch>
-      {isAuth && authRoutes.map(({path, Component}) =>
-        <Route key={path} path={path} component={Component} exact />,
-      )}
-      {publicRoutes.map(({path, Component}) =>
-        <Route key={path} path={path} component={Component} exact />,
-      )}
-      <Redirect to={Routes.SHOP_ROUTE} />
-    </Switch>
-  );
+const AppRouter: React.FC = () => {
+    const { isAuth } = useSelector((state) => state.user);
+    return (
+        <Switch>
+            {isAuth &&
+                authRoutes.map((route) => (
+                    <Route
+                        key={route.path}
+                        path={route.path}
+                        component={route.component}
+                        exact
+                    />
+                ))}
+            {publicRoutes.map((route) => (
+                <Route
+                    key={route.path}
+                    path={route.path}
+                    component={route.component}
+                    exact
+                />
+            ))}
+            <Redirect to={Routes.SHOP_ROUTE} />
+        </Switch>
+    );
 };
 
 export default AppRouter;

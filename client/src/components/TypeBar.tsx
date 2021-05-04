@@ -1,51 +1,43 @@
 import React from 'react';
-import {List, ListItem, ListItemText, Typography} from '@material-ui/core';
-import {setSelectedType} from '../redux/actions/deviceActions';
-import {makeStyles} from '@material-ui/core/styles';
-import {useAppDispatch, useAppSelector} from '../types/hooks';
-import {IOptions} from '../types/devices';
+import { List, ListItem, styled, Typography } from '@material-ui/core';
+import { IOption } from '~/types/devices';
 
-const TypeBar = () => {
-  const useStyles = makeStyles((theme) => ({
-    text: {
-      textAlign: 'center',
-      textTransform: 'uppercase',
-    },
-  }));
+interface TypeBarProps {
+    types: IOption[];
+    selectedType: IOption | null;
+    onTypeClick: (type: IOption | null) => void;
+}
 
-  const classes = useStyles();
+const TypeList = styled(List)({});
 
-  const dispatch = useAppDispatch();
-  const {types, selectedType} = useAppSelector(({devices}) => devices);
+const TypeListItem = styled(ListItem)({});
 
-  const onTypeClick = (type: IOptions | null) => {
-    dispatch(setSelectedType(type));
-  };
-
-  return (
-    <List component="ul">
-      <Typography>Types:</Typography>
-      <ListItem
-        button
-        className={classes.text}
-        onClick={() => onTypeClick(null)}
-        selected={!selectedType}
-      >
-        <ListItemText primary='ALL'/>
-      </ListItem>
-      {types && types.map((type) =>
-        <ListItem
-          button
-          className={classes.text}
-          key={type.id}
-          onClick={() => onTypeClick(type)}
-          selected={!!selectedType && type.id === selectedType.id}
-        >
-          <ListItemText primary={type.name}/>
-        </ListItem>,
-      )}
-    </List>
-  );
+const TypeBar: React.FC<TypeBarProps> = ({
+    types,
+    onTypeClick,
+    selectedType,
+}) => {
+    return (
+        <TypeList>
+            <TypeListItem
+                button
+                selected={!selectedType}
+                onClick={() => onTypeClick(null)}
+            >
+                <Typography>All Types</Typography>
+            </TypeListItem>
+            {types.map((type: IOption) => (
+                <TypeListItem
+                    button
+                    key={type.name}
+                    selected={!!selectedType && selectedType.id === type.id}
+                    onClick={() => onTypeClick(type)}
+                >
+                    <Typography>{type.name}</Typography>
+                </TypeListItem>
+            ))}
+        </TypeList>
+    );
 };
 
 export default TypeBar;

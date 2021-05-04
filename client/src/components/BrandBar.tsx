@@ -1,54 +1,43 @@
 import React from 'react';
-import {makeStyles} from '@material-ui/core/styles';
-import {setSelectedBrand} from '../redux/actions/deviceActions';
-import {List, ListItem, ListItemText, Typography} from '@material-ui/core';
-import {useAppDispatch, useAppSelector} from '../types/hooks';
-import {IOptions} from '../types/devices';
+import { List, ListItem, styled, Typography } from '@material-ui/core';
+import { IOption } from '~/types/devices';
 
-const BrandBar = () => {
-  const useStyles = makeStyles((theme) => ({
-    list: {
-      display: 'flex',
-      flexWrap: 'wrap',
-    },
-    text: {
-      textAlign: 'center',
-      textTransform: 'uppercase',
-    },
-  }));
+interface BrandBarProps {
+    brands: IOption[];
+    selectedBrand: IOption | null;
+    onBrandClick: (brand: IOption | null) => void;
+}
 
-  const classes = useStyles();
+const BrandList = styled(List)({});
 
-  const dispatch = useAppDispatch();
-  const {brands, selectedBrand} = useAppSelector(({devices}) => devices);
-  const onBrandClick = (brand: IOptions | null) => {
-    dispatch(setSelectedBrand(brand));
-  };
+const BrandListItem = styled(ListItem)({});
 
-  return (
-    <List component="ul" className={classes.list}>
-      <Typography>Brands:</Typography>
-      <ListItem
-        button
-        className={classes.text}
-        onClick={() => onBrandClick(null)}
-        selected={!selectedBrand}
-      >
-        <ListItemText primary='ALL'/>
-      </ListItem>
-      {brands && brands.map((brand) =>
-        <ListItem
-          button
-          className={classes.text}
-          key={brand.id}
-          onClick={() => onBrandClick(brand)}
-          selected={!!selectedBrand && brand.id === selectedBrand.id}
-        >
-          <ListItemText primary={brand.name}/>
-        </ListItem>,
-      )}
-    </List>
-  );
+const BrandBar: React.FC<BrandBarProps> = ({
+    brands,
+    selectedBrand,
+    onBrandClick,
+}) => {
+    return (
+        <BrandList>
+            <BrandListItem
+                button
+                selected={!selectedBrand}
+                onClick={() => onBrandClick(null)}
+            >
+                <Typography>All Brands</Typography>
+            </BrandListItem>
+            {brands.map((brand: IOption) => (
+                <BrandListItem
+                    button
+                    key={brand.name}
+                    selected={!!selectedBrand && selectedBrand.id === brand.id}
+                    onClick={() => onBrandClick(brand)}
+                >
+                    <Typography>{brand.name}</Typography>
+                </BrandListItem>
+            ))}
+        </BrandList>
+    );
 };
 
 export default BrandBar;

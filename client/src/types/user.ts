@@ -1,15 +1,26 @@
 export interface UserState {
-  isAuth: boolean;
-  user: boolean | User;
+    isAuth: boolean;
+    user: boolean | IUser;
 }
 
-export type User = {
-  id: string | number;
-  email: string;
-  role: string;
+export interface IUser {
+    id: string | number;
+    email: string;
+    role: string;
 }
 
 export enum UserActionTypes {
-  SET_AUTH = 'user/SET_AUTH',
-  SET_USER = 'user/SET_USER',
+    SET_AUTH = 'user/setAuth',
+    SET_USER = 'user/setUser',
 }
+
+type setUser = {
+    type: UserActionTypes.SET_USER;
+    payload: IUser;
+};
+
+type setAuth = {
+    type: UserActionTypes.SET_AUTH;
+};
+
+export type UserActions = setUser | setAuth;
