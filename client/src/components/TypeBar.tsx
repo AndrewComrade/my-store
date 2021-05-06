@@ -1,6 +1,6 @@
 import React from 'react';
 import { List, ListItem, styled, Typography } from '@material-ui/core';
-import { IOption } from '~/types/devices';
+import { IOption } from '~/types/brands';
 
 interface TypeBarProps {
     types: IOption[];

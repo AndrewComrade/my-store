@@ -1,5 +1,5 @@
 import React from 'react';
-import { IDevice, IOption } from '~/types/devices';
+import { IDevice } from '~/types/devices';
 import {
     Button,
     Card,
@@ -12,6 +12,7 @@ import {
 import { useSelector } from '~/hooks/useTypedSelector';
 import { useHistory } from 'react-router';
 import { Routes } from '~/routes';
+import { IOption } from '~/types/brands';
 
 interface DeviceItemProps {
     device: IDevice;
@@ -23,7 +24,8 @@ const DeviceImage = styled(CardMedia)({
 
 const DeviceItem: React.FC<DeviceItemProps> = ({ device }) => {
     const history = useHistory();
-    const { brands, types } = useSelector((state) => state.devices);
+    const { brands } = useSelector((state) => state.brands);
+    const { types } = useSelector((state) => state.types);
 
     const deviceType: IOption | undefined = types.find(
         (type: IOption) => device.typeId === type.id

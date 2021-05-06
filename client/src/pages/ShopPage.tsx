@@ -1,21 +1,21 @@
 import React, { useEffect } from 'react';
-import { Grid, styled, Typography, GridProps } from '@material-ui/core';
+import { Grid, styled, Typography } from '@material-ui/core';
 import TypeBar from '~/components/TypeBar';
 import BrandBar from '~/components/BrandBar';
 import DevicesList from '~/components/DevicesList';
-import { IOption } from '~/types/devices';
 import { useActions } from '~/hooks/useActions';
 import { useSelector } from '~/hooks/useTypedSelector';
+import { IOption } from '~/types/brands';
 
-const ShopPageWrapper = styled((props: GridProps) => <Grid {...props} />)({
+const ShopPageWrapper = styled(Grid)({
     paddingTop: 50,
 });
 
 const ShopPage: React.FC = () => {
     const { setSelectedBrand, setSelectedType, fetchDevices } = useActions();
-    const { selectedBrand, selectedType, brands, types, devices } = useSelector(
-        (state) => state.devices
-    );
+    const { devices } = useSelector((state) => state.devices);
+    const { selectedBrand, brands } = useSelector((state) => state.brands);
+    const { selectedType, types } = useSelector((state) => state.types);
 
     useEffect(() => {
         fetchDevices(selectedType?.id, selectedBrand?.id);

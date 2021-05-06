@@ -1,7 +1,11 @@
 import userReducer from './userReducer';
-import deviceReducer from './deviceReducer';
+import devicesReducer from './devicesReducer';
+import typesReducer from '~/store/reducers/typesReducer';
+import brandsReducer from '~/store/reducers/brandsReducer';
 
 export const rootReducer = {
     user: userReducer,
-    devices: deviceReducer,
+    devices: devicesReducer,
+    types: typesReducer,
+    brands: brandsReducer,
 };

@@ -1,9 +1,13 @@
-import * as DeviceActions from './deviceActions';
 import * as UserActions from './userActions';
+import * as DeviceActions from './deviceActions';
+import * as BrandsActions from './brandsActions';
+import * as TypesActions from './typesActions';
 
 const ActionCreators = {
-    ...DeviceActions,
     ...UserActions,
+    ...DeviceActions,
+    ...BrandsActions,
+    ...TypesActions,
 };
 
 export default ActionCreators;

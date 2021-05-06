@@ -1,49 +1,62 @@
-import React from 'react';
-import {
-    AppBar,
-    Button,
-    createStyles,
-    IconButton,
-    makeStyles,
-    Theme,
-    Toolbar,
-    Typography,
-} from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
+import React, { useState } from 'react';
+import { AppBar, Button, IconButton, Toolbar } from '@material-ui/core';
+import { styled } from '@material-ui/core/styles';
+import Smartphone from '@material-ui/icons/Smartphone';
+import CreateTypeModal from '~/components/modals/CreateTypeModal';
+import CreateBrandModal from '~/components/modals/CreateBrandModal';
+import CreateDeviceModal from '~/components/modals/CreateDeviceModal';
+import { useHistory } from 'react-router';
+import { Routes } from '~/routes';
+import { useActions } from '~/hooks/useActions';
 
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        root: {
-            flexGrow: 1,
-        },
-        menuButton: {
-            marginRight: theme.spacing(2),
-        },
-        title: {
-            flexGrow: 1,
-        },
-    })
-);
+const CreateBtn = styled(Button)({
+    marginLeft: 15,
+    backgroundColor: '#4F64E0',
+    color: '#fff',
+});
 
 const NavBar = () => {
-    const classes = useStyles();
+    const { createType } = useActions();
+    const history = useHistory();
+
+    const [isTypeOpen, setIsTypeOpen] = useState<boolean>(false);
+
+    const onLogoClick = () => {
+        history.push(Routes.SHOP_ROUTE);
+    };
+
+    const onCreateTypeOpen = () => {
+        setIsTypeOpen(true);
+    };
+
+    const onCreateTypeClose = () => {
+        setIsTypeOpen(false);
+    };
+
+    const onCreateTypeSubmit = (type: string) => {
+        setIsTypeOpen(false);
+        createType(type);
+    };
 
     return (
         <AppBar position="static">
             <Toolbar>
-                <IconButton
-                    edge="start"
-                    className={classes.menuButton}
-                    color="inherit"
-                    aria-label="menu"
-                >
-                    <MenuIcon />
+                <IconButton color="inherit" onClick={onLogoClick}>
+                    <Smartphone />
                 </IconButton>
-                <Typography variant="h6" className={classes.title}>
-                    News
-                </Typography>
-                <Button color="inherit">Login</Button>
+                <CreateBtn variant="outlined" onClick={onCreateTypeOpen}>
+                    Crate Type
+                </CreateBtn>
+                <CreateBtn variant="outlined">Create Brand</CreateBtn>
+                <CreateBtn variant="outlined">Create Device</CreateBtn>
             </Toolbar>
+            <CreateTypeModal
+                isOpen={isTypeOpen}
+                handleClose={onCreateTypeClose}
+                handleSubmit={onCreateTypeSubmit}
+            />
+            <CreateBrandModal />
+            <CreateDeviceModal />
         </AppBar>
     );
 };

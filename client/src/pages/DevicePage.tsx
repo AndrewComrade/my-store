@@ -44,6 +44,10 @@ const DevicePage: React.FC = () => {
             <Grid item xs={6}>
                 <List>
                     <ListItem>
+                        <Typography variant="h6">ID:</Typography>
+                        <Typography variant="h6">{device.id}</Typography>
+                    </ListItem>
+                    <ListItem>
                         <Typography variant="h6">Name:</Typography>
                         <Typography variant="h6">{device.name}</Typography>
                     </ListItem>

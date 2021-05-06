@@ -1,1 +1,1 @@
-import { User, UserActionTypes } from '~/types/user';
+import { UserActionTypes } from '~/types/user';
