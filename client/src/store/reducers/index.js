@@ -1,5 +1,5 @@
-import userReducer from './userReducer';
-import devicesReducer from './devicesReducer';
+import userReducer from '~/store/reducers/userReducer';
+import devicesReducer from '~/store/reducers/devicesReducer';
 import typesReducer from '~/store/reducers/typesReducer';
 import brandsReducer from '~/store/reducers/brandsReducer';
 

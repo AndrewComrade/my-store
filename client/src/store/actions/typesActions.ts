@@ -13,7 +13,7 @@ export const fetchTypes = () => {
             dispatch(fetchTypesSuccess(response.data));
             console.log(response.data);
         } catch (err) {
-            dispatch(fetchDataError(err.message));
+            dispatch(fetchTypesError(err.message));
             console.log(err.message);
         }
     };
@@ -22,19 +22,26 @@ export const fetchTypes = () => {
 export const createType = (type: string) => {
     return async () => {
         try {
-            const response = await axios.post(`${url}api/type`, type, {
-                headers: {
-                    Authorization: `Bearer`,
-                },
-            });
+            const response = await axios.post(
+                `${url}api/type`,
+                { name: type },
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem(
+                            'token'
+                        )}`,
+                    },
+                }
+            );
             console.log(response.data);
+            alert('New type created');
         } catch (err) {
-            console.log(err.message);
+            alert(err.message);
         }
     };
 };
 
-export const fetchDataError = (payload: string): TypesActions => {
+export const fetchTypesError = (payload: string): TypesActions => {
     return { type: TypesActionTypes.FETCH_TYPES_ERROR, payload };
 };
 

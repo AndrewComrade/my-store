@@ -8,9 +8,10 @@ import { useActions } from '~/hooks/useActions';
 import { Container } from '@material-ui/core';
 
 const App = () => {
-    const { fetchTypes, fetchBrands } = useActions();
+    const { fetchTypes, fetchBrands, check } = useActions();
 
     useEffect(() => {
+        check();
         fetchTypes();
         fetchBrands();
     }, []);
