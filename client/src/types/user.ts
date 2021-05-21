@@ -16,12 +16,12 @@ export enum UserActionTypes {
 
 type setUser = {
     type: UserActionTypes.SET_USER;
-    payload: IUser;
+    payload: IUser | null;
 };
 
 type setAuth = {
     type: UserActionTypes.SET_AUTH;
-    // payload: boolean;
+    payload: boolean;
 };
 
 export type UserActions = setUser | setAuth;

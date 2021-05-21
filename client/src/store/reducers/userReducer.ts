@@ -10,7 +10,7 @@ const userReducer = (state: UserState = initialState, action: UserActions) => {
         case UserActionTypes.SET_USER:
             return { ...state, user: action.payload };
         case UserActionTypes.SET_AUTH:
-            return { ...state, isAuth: true };
+            return { ...state, isAuth: action.payload };
         default:
             return state;
     }

@@ -17,7 +17,7 @@ export const registration = (email: string, password: string) => {
             const user: IUser = jwtDecode(response.data.token);
 
             dispatch(setUser(user));
-            dispatch({ type: UserActionTypes.SET_AUTH });
+            dispatch(setAuth(true));
 
             localStorage.setItem('token', response.data.token);
 
@@ -39,7 +39,7 @@ export const login = (email: string, password: string) => {
             const user: IUser = jwtDecode(response.data.token);
 
             dispatch(setUser(user));
-            dispatch({ type: UserActionTypes.SET_AUTH });
+            dispatch(setAuth(true));
 
             localStorage.setItem('token', response.data.token);
 
@@ -62,13 +62,17 @@ export const check = () => {
             const user: IUser = jwtDecode(response.data.token);
 
             dispatch(setUser(user));
-            dispatch({ type: UserActionTypes.SET_AUTH });
+            dispatch(setAuth(true));
         } catch (err) {
             console.log(err.message);
         }
     };
 };
 
-export const setUser = (payload: IUser): UserActions => {
+export const setUser = (payload: IUser | null): UserActions => {
     return { type: UserActionTypes.SET_USER, payload };
+};
+
+export const setAuth = (payload: boolean): UserActions => {
+    return { type: UserActionTypes.SET_AUTH, payload };
 };

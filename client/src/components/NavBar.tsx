@@ -18,7 +18,7 @@ const CreateBtn = styled(Button)({
 
 const NavBar = () => {
     const history = useHistory();
-    const { createType, setUser } = useActions();
+    const { createType, setUser, setAuth } = useActions();
     const { isAuth } = useSelector((state) => state.user);
 
     const [isTypeOpen, setIsTypeOpen] = useState<boolean>(false);
@@ -33,6 +33,8 @@ const NavBar = () => {
 
     const onLogout = () => {
         setUser(null);
+        setAuth(false);
+        localStorage.removeItem('token');
     };
 
     const onCreateTypeOpen = () => {
