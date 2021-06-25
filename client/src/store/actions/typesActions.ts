@@ -1,7 +1,7 @@
 import { Dispatch } from 'react';
-import axios from 'axios';
 import { TypesActions, TypesActionTypes } from '~/types/types';
 import { IOption } from '~/types/brands';
+import { host, authHost } from '~/http';
 
 const url = process.env.REACT_APP_API_URL;
 
@@ -9,7 +9,7 @@ export const fetchTypes = () => {
     return async (dispatch: Dispatch<TypesActions>) => {
         dispatch({ type: TypesActionTypes.FETCH_TYPES });
         try {
-            const response = await axios.get(url + 'api/type');
+            const response = await host.get(url + 'api/type');
             dispatch(fetchTypesSuccess(response.data));
             console.log(response.data);
         } catch (err) {
@@ -22,17 +22,9 @@ export const fetchTypes = () => {
 export const createType = (type: string) => {
     return async () => {
         try {
-            const response = await axios.post(
-                `${url}api/type`,
-                { name: type },
-                {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem(
-                            'token'
-                        )}`,
-                    },
-                }
-            );
+            const response = await authHost.post(`${url}api/type`, {
+                name: type,
+            });
             console.log(response.data);
             alert('New type created');
         } catch (err) {

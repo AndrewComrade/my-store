@@ -9,46 +9,52 @@ import {
     TextField,
 } from '@material-ui/core';
 
-interface CreateTypeModalProps {
+interface BrandModalProps {
     isOpen: boolean;
-    handleClose: () => void;
-    handleSubmit: (value: string) => void;
+    onClose: () => void;
+    onCreate: (brand: string) => void;
 }
 
-const CreateTypeModal: React.FC<CreateTypeModalProps> = ({
+const BrandModal: React.FC<BrandModalProps> = ({
     isOpen,
-    handleClose,
-    handleSubmit,
+    onClose,
+    onCreate,
 }) => {
     const [value, setValue] = useState<string>('');
+
     const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value);
     };
 
+    const onSubmit = () => {
+        onCreate(value);
+        onClose();
+    };
+
     return (
         <Dialog open={isOpen}>
-            <DialogTitle>New type</DialogTitle>
+            <DialogTitle>New brand</DialogTitle>
             <DialogContent>
-                <DialogContentText>Adding a new device type</DialogContentText>
+                <DialogContentText>Adding a new device brand</DialogContentText>
                 <TextField
                     autoFocus
                     margin="dense"
-                    label="Type"
+                    label="Brand"
                     fullWidth
                     value={value}
                     onChange={onInputChange}
                 />
             </DialogContent>
             <DialogActions>
-                <Button onClick={handleClose} color="primary">
+                <Button onClick={onClose} color="primary">
                     Cancel
                 </Button>
-                <Button onClick={() => handleSubmit(value)} color="primary">
-                    Create type
+                <Button onClick={onSubmit} color="primary">
+                    Create brand
                 </Button>
             </DialogActions>
         </Dialog>
     );
 };
 
-export default CreateTypeModal;
+export default BrandModal;

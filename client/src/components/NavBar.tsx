@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { AppBar, Box, Button, IconButton, Toolbar } from '@material-ui/core';
 import { styled } from '@material-ui/core/styles';
 import Smartphone from '@material-ui/icons/Smartphone';
-import CreateTypeModal from '~/components/modals/CreateTypeModal';
-import CreateBrandModal from '~/components/modals/CreateBrandModal';
-import CreateDeviceModal from '~/components/modals/CreateDeviceModal';
 import { useHistory } from 'react-router';
 import { Routes } from '~/routes';
 import { useActions } from '~/hooks/useActions';
 import { useSelector } from '~/hooks/useTypedSelector';
+import CreateType from '~/components/modals/CreateType';
+import CreateBrand from '~/components/modals/CreateBrand';
+import CreateDevice from '~/components/modals/CreateDevice';
 
 const CreateBtn = styled(Button)({
     marginRight: 15,
@@ -18,10 +18,11 @@ const CreateBtn = styled(Button)({
 
 const NavBar = () => {
     const history = useHistory();
-    const { createType, setUser, setAuth } = useActions();
     const { isAuth } = useSelector((state) => state.user);
-
+    const { createType, createBrand, setUser, setAuth } = useActions();
     const [isTypeOpen, setIsTypeOpen] = useState<boolean>(false);
+    const [isBrandOpen, setIsBrandOpen] = useState<boolean>(false);
+    const [isDeviceOpen, setIsDeviceOpen] = useState<boolean>(false);
 
     const onLogoClick = () => {
         history.push(Routes.SHOP_ROUTE);
@@ -37,20 +38,6 @@ const NavBar = () => {
         localStorage.removeItem('token');
     };
 
-    const onCreateTypeOpen = () => {
-        setIsTypeOpen(true);
-    };
-
-    const onCreateTypeClose = () => {
-        setIsTypeOpen(false);
-    };
-
-    const onCreateTypeSubmit = (type: string) => {
-        setIsTypeOpen(false);
-        createType(type);
-        console.log('type', type);
-    };
-
     return (
         <AppBar position="static">
             <Toolbar>
@@ -61,12 +48,22 @@ const NavBar = () => {
                     <Box>
                         <CreateBtn
                             variant="outlined"
-                            onClick={onCreateTypeOpen}
+                            onClick={() => setIsTypeOpen(true)}
                         >
                             Crate Type
                         </CreateBtn>
-                        <CreateBtn variant="outlined">Create Brand</CreateBtn>
-                        <CreateBtn variant="outlined">Create Device</CreateBtn>
+                        <CreateBtn
+                            variant="outlined"
+                            onClick={() => setIsBrandOpen(true)}
+                        >
+                            Create Brand
+                        </CreateBtn>
+                        <CreateBtn
+                            variant="outlined"
+                            onClick={() => setIsDeviceOpen(true)}
+                        >
+                            Create Device
+                        </CreateBtn>
                         <Button
                             variant="outlined"
                             color="inherit"
@@ -86,13 +83,17 @@ const NavBar = () => {
                     </Button>
                 )}
             </Toolbar>
-            <CreateTypeModal
+            <CreateType
                 isOpen={isTypeOpen}
-                handleClose={onCreateTypeClose}
-                handleSubmit={onCreateTypeSubmit}
+                onClose={() => setIsTypeOpen(false)}
+                onCreate={createType}
             />
-            <CreateBrandModal />
-            <CreateDeviceModal />
+            <CreateBrand
+                isOpen={isBrandOpen}
+                onClose={() => setIsBrandOpen(false)}
+                onCreate={createBrand}
+            />
+            <CreateDevice />
         </AppBar>
     );
 };

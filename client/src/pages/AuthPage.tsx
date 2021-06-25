@@ -106,12 +106,12 @@ const AuthPage: React.FC = () => {
                 {isLogin ? (
                     <SignBtnText>
                         <NavLink to={Routes.REGISTRATION_ROUTE}>
-                            Sign Up
+                            Registration
                         </NavLink>
                     </SignBtnText>
                 ) : (
                     <SignBtnText>
-                        <NavLink to={Routes.LOGIN_ROUTE}>Sign In</NavLink>
+                        <NavLink to={Routes.LOGIN_ROUTE}>Login</NavLink>
                     </SignBtnText>
                 )}
             </Grid>

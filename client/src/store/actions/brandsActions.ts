@@ -1,6 +1,6 @@
 import { Dispatch } from 'react';
-import axios from 'axios';
 import { BrandsActions, BrandsActionTypes, IOption } from '~/types/brands';
+import { authHost, host } from '~/http';
 
 const url = process.env.REACT_APP_API_URL;
 
@@ -8,12 +8,26 @@ export const fetchBrands = () => {
     return async (dispatch: Dispatch<BrandsActions>) => {
         dispatch({ type: BrandsActionTypes.FETCH_BRANDS });
         try {
-            const response = await axios.get(url + 'api/brand');
+            const response = await host.get(url + 'api/brand');
             dispatch(fetchBrandsSuccess(response.data));
             console.log(response.data);
         } catch (err) {
             dispatch(fetchBrandsError(err.message));
             console.log(err.message);
+        }
+    };
+};
+
+export const createBrand = (brand: string) => {
+    return async () => {
+        try {
+            const response = await authHost.post(`${url}api/brand`, {
+                name: brand,
+            });
+            console.log(response.data);
+            alert('New brand created');
+        } catch (err) {
+            alert(err.message);
         }
     };
 };

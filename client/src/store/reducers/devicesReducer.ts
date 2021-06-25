@@ -8,6 +8,7 @@ const initialState: DevicesState = {
     loading: false,
     error: '',
     devices: [],
+    device: null,
     page: 1,
     totalCount: 0,
     limit: 2,

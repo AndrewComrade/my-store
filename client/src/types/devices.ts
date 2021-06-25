@@ -2,7 +2,7 @@ export interface DevicesState {
     loading: boolean;
     error: string;
     devices: Array<IDevice>;
-    device?: IDevice;
+    device: IDevice | null;
     page: number;
     totalCount: number;
     limit: number;
@@ -12,7 +12,6 @@ export interface IInfo {
     id: number;
     title: string;
     description: string;
-    number: any;
 }
 
 export interface IDevice {

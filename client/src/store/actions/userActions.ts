@@ -1,14 +1,14 @@
-import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import { Dispatch } from 'react';
 import { IUser, UserActions, UserActionTypes } from '~/types/user';
+import { authHost, host } from '~/http';
 
 const url = process.env.REACT_APP_API_URL;
 
 export const registration = (email: string, password: string) => {
     return async (dispatch: Dispatch<UserActions>) => {
         try {
-            const response = await axios.post(`${url}api/user/registration`, {
+            const response = await host.post(`${url}api/user/registration`, {
                 email,
                 password,
                 role: 'ADMIN',
@@ -31,7 +31,7 @@ export const registration = (email: string, password: string) => {
 export const login = (email: string, password: string) => {
     return async (dispatch: Dispatch<UserActions>) => {
         try {
-            const response = await axios.post(`${url}api/user/login`, {
+            const response = await host.post(`${url}api/user/login`, {
                 email,
                 password,
             });
@@ -53,11 +53,7 @@ export const login = (email: string, password: string) => {
 export const check = () => {
     return async (dispatch: Dispatch<UserActions>) => {
         try {
-            const response = await axios.get(`${url}api/user/auth`, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`,
-                },
-            });
+            const response = await authHost.get(`${url}api/user/auth`);
 
             const user: IUser = jwtDecode(response.data.token);
 

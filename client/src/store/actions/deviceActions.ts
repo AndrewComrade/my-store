@@ -1,6 +1,6 @@
 import { DevicesActions, DevicesActionTypes, IDevice } from '~/types/devices';
 import { Dispatch } from 'react';
-import axios from 'axios';
+import { authHost, host } from '~/http';
 
 const url = process.env.REACT_APP_API_URL;
 
@@ -13,7 +13,7 @@ export const fetchDevices = (
     return async (dispatch: Dispatch<DevicesActions>) => {
         dispatch({ type: DevicesActionTypes.FETCH_DEVICES });
         try {
-            const response = await axios.get(url + 'api/device', {
+            const response = await host.get(url + 'api/device', {
                 params: {
                     typeId,
                     brandId,
@@ -34,27 +34,11 @@ export const fetchDevice = (id: string) => {
     return async (dispatch: Dispatch<DevicesActions>) => {
         dispatch({ type: DevicesActionTypes.FETCH_DEVICES });
         try {
-            const response = await axios.get(`${url}api/device/${id}`);
+            const response = await host.get(`${url}api/device/${id}`);
             dispatch(fetchDeviceSuccess(response.data));
             console.log(response.data);
         } catch (err) {
             dispatch(fetchDevicesError(err.message));
-            console.log(err.message);
-        }
-    };
-};
-
-export const createType = (type: string) => {
-    return async (dispatch: Dispatch<DevicesActions>) => {
-        dispatch({ type: DevicesActionTypes.FETCH_DEVICES });
-        try {
-            const response = await axios.post(`${url}api/type`, type, {
-                headers: {
-                    Authorization: `Bearer`,
-                },
-            });
-            console.log(response.data);
-        } catch (err) {
             console.log(err.message);
         }
     };
