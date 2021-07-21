@@ -10,10 +10,8 @@ export const fetchBrands = () => {
         try {
             const response = await host.get(url + 'api/brand');
             dispatch(fetchBrandsSuccess(response.data));
-            console.log(response.data);
         } catch (err) {
             dispatch(fetchBrandsError(err.message));
-            console.log(err.message);
         }
     };
 };
@@ -24,7 +22,6 @@ export const createBrand = (brand: string) => {
             const response = await authHost.post(`${url}api/brand`, {
                 name: brand,
             });
-            console.log(response.data);
             alert('New brand created');
         } catch (err) {
             alert(err.message);

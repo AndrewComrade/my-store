@@ -11,10 +11,8 @@ export const fetchTypes = () => {
         try {
             const response = await host.get(url + 'api/type');
             dispatch(fetchTypesSuccess(response.data));
-            console.log(response.data);
         } catch (err) {
             dispatch(fetchTypesError(err.message));
-            console.log(err.message);
         }
     };
 };
@@ -25,7 +23,6 @@ export const createType = (type: string) => {
             const response = await authHost.post(`${url}api/type`, {
                 name: type,
             });
-            console.log(response.data);
             alert('New type created');
         } catch (err) {
             alert(err.message);

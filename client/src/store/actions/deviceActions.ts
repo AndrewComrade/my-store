@@ -22,10 +22,8 @@ export const fetchDevices = (
                 },
             });
             dispatch(fetchDevicesSuccess(response.data.rows));
-            console.log(response.data.rows);
         } catch (err) {
             dispatch(fetchDevicesError(err.message));
-            console.log(err.message);
         }
     };
 };
@@ -36,10 +34,8 @@ export const fetchDevice = (id: string) => {
         try {
             const response = await host.get(`${url}api/device/${id}`);
             dispatch(fetchDeviceSuccess(response.data));
-            console.log(response.data);
         } catch (err) {
             dispatch(fetchDevicesError(err.message));
-            console.log(err.message);
         }
     };
 };

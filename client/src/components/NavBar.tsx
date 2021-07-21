@@ -16,13 +16,17 @@ const CreateBtn = styled(Button)({
     color: '#fff',
 });
 
+type ModalState = 'typeOpen' | 'brandOpen' | 'deviceOpen' | null;
+
 const NavBar = () => {
     const history = useHistory();
     const { isAuth } = useSelector((state) => state.user);
     const { createType, createBrand, setUser, setAuth } = useActions();
-    const [isTypeOpen, setIsTypeOpen] = useState<boolean>(false);
-    const [isBrandOpen, setIsBrandOpen] = useState<boolean>(false);
-    const [isDeviceOpen, setIsDeviceOpen] = useState<boolean>(false);
+
+    const [modalState, setModalState] = useState<ModalState>(null);
+    // const [isTypeOpen, setIsTypeOpen] = useState<boolean>(false);
+    // const [isBrandOpen, setIsBrandOpen] = useState<boolean>(false);
+    // const [isDeviceOpen, setIsDeviceOpen] = useState<boolean>(false);
 
     const onLogoClick = () => {
         history.push(Routes.SHOP_ROUTE);
@@ -37,6 +41,13 @@ const NavBar = () => {
         setAuth(false);
         localStorage.removeItem('token');
     };
+    //
+    // const renderModal = (param: string | null) => {
+    //     switch (param) {
+    //         case 'typeOpen':
+    //             return <CreateType />;
+    //     }
+    // };
 
     return (
         <AppBar position="static">
@@ -48,19 +59,19 @@ const NavBar = () => {
                     <Box>
                         <CreateBtn
                             variant="outlined"
-                            onClick={() => setIsTypeOpen(true)}
+                            onClick={() => setModalState('typeOpen')}
                         >
                             Crate Type
                         </CreateBtn>
                         <CreateBtn
                             variant="outlined"
-                            onClick={() => setIsBrandOpen(true)}
+                            onClick={() => setModalState('brandOpen')}
                         >
                             Create Brand
                         </CreateBtn>
                         <CreateBtn
                             variant="outlined"
-                            onClick={() => setIsDeviceOpen(true)}
+                            onClick={() => setModalState('deviceOpen')}
                         >
                             Create Device
                         </CreateBtn>
