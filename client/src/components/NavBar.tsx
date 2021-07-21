@@ -24,9 +24,9 @@ const NavBar = () => {
     const { createType, createBrand, setUser, setAuth } = useActions();
 
     const [modalState, setModalState] = useState<ModalState>(null);
-    // const [isTypeOpen, setIsTypeOpen] = useState<boolean>(false);
-    // const [isBrandOpen, setIsBrandOpen] = useState<boolean>(false);
-    // const [isDeviceOpen, setIsDeviceOpen] = useState<boolean>(false);
+    const [isTypeOpen, setIsTypeOpen] = useState<boolean>(false);
+    const [isBrandOpen, setIsBrandOpen] = useState<boolean>(false);
+    const [isDeviceOpen, setIsDeviceOpen] = useState<boolean>(false);
 
     const onLogoClick = () => {
         history.push(Routes.SHOP_ROUTE);
